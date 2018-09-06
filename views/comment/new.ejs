@@ -1,0 +1,22 @@
+<% include ../partials/preheader %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/userForm.css">
+<% include ../partials/postheader %>
+
+<div class="container">
+	<h1>Comment</h1>
+	<form action="/posts/comment" method="POST">
+	  <div class="form-group">
+	    <label for="author">Author</label>
+	    <input type="text" class="form-control" id="author" value="<%= user.username %>" disabled>
+	  </div>
+	  <div class="form-group">
+	    <label for="comment">Comment</label>
+	    <textarea class="form-control" id="comment" name="comment[content]" placeholder="Written by <%= user.username %>" required></textarea>
+	  </div>
+	  <!-- Add image upload -->
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<% include ../partials/prefooter %>
+<% include ../partials/postfooter %>

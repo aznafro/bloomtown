@@ -1,0 +1,123 @@
+#flowerBG {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+body {
+	padding-top: 70px;
+}
+
+.container {
+	width: 90%;
+}
+
+.col-md-4, .col-sm-6 {
+	margin: 15px 0;
+}
+
+.card-body {
+	padding-bottom: 5px;
+	box-shadow: 0 7px 15px rgba(0, 0, 0, .2), 0 3px 8px rgba(0, 0, 0, .2);
+}
+
+.card-text {
+	margin-bottom: 5px;
+	max-height: 500px;
+	overflow: hidden;
+	-webkit-transition: max-height 0.75s;
+	transition: max-height 0.75s; 
+}
+
+.show-more {
+	position: relative;
+	width: 100%;
+	color: #2f2f2f;
+	text-transform: uppercase;
+	font-weight: 600;
+	background: transparent;
+	border: none;
+	height: 40px;
+	display: none;
+	z-index: 0;
+}
+
+.show-more:hover {
+	color: white;
+}
+
+.show-more:focus {
+	outline: none;
+}
+
+.show-more::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 100%;
+	background: #FFADF4;
+	z-index: -1;
+	transition: 0.3s;
+}
+
+.show-more:hover::before {
+	width: 100%;
+	left: 0;
+}
+
+.show-less::before {
+	background: #91BAFF;
+}
+
+img {
+	height: 200px;
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+@media only screen and (min-width: 576px) {
+	#flowerBG {
+		width: 90%;
+		left: 5vw;
+	}
+
+	.container {
+		width: 80%;
+	}
+
+	.card-text {
+		max-height: 100px;
+	}
+
+	.show-flower-desc {
+		max-height: 500px;
+	}
+
+	.show-more {
+		display: block;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	#flowerBG {
+		width: 80%;
+		left: 10vw;
+	}
+
+	.container {
+		width: 70%;
+	}
+
+	.card-text {
+		max-height: 100px;
+	}
+
+	.show-flower-desc {
+		max-height: 500px;
+	}
+}

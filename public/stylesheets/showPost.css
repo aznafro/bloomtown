@@ -1,0 +1,13 @@
+.container {
+	width: 90%;
+	margin: 75px auto;
+}
+
+.card {
+	width: 100%;
+}
+
+#addComment {
+	float: right;
+	margin-top: 20px;
+}

@@ -1,0 +1,22 @@
+<% include ../partials/preheader %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/userForm.css">
+<% include ../partials/postheader %>
+
+<div class="container">
+	<h1>Post</h1>
+	<form action="/posts" method="POST">
+	  <div class="form-group">
+	    <label for="title">Title</label>
+	    <input type="text" class="form-control" id="title" name="post[title]" pattern=".{4, }" placeholder="Title" required>
+	  </div>
+	  <div class="form-group">
+	    <label for="content">Content</label>
+	    <textarea class="form-control" id="content" name="post[content]" placeholder="Written by <%= user.username %>" required></textarea>
+	  </div>
+	  <!-- Add image upload -->
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<% include ../partials/prefooter %>
+<% include ../partials/postfooter %>

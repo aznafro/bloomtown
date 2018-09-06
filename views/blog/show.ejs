@@ -1,0 +1,31 @@
+<% include ../partials/preheader %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/showPost.css">
+<% include ../partials/postheader %>
+
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+		    <h1 class="card-title"><%= post.title %></h1>
+		    <span>Submitted by <strong><%= post.poster %></strong></span>
+		    <span><em><%= post.date.toDateString() %></em></span>
+		    <p class="card-text"><%= post.content %></p>
+		</div>
+	</div>
+
+	<a id="addComment" class="btn btn-outline-warning" href="/posts/comment/new">Add Comment</a>
+	
+	<% if(post.comments.length > 0) { %>
+		<div class="well">
+			<h2>Comments</h2>
+			<hr>
+			<% post.comments.forEach(function(comment) { %>
+				<h3><%= comment.commenter %></h3>
+				<span><em><%= comment.date.toDateString() %></em></span>
+				<p><%= comment.content %></p>
+			<% }); %>
+		</div>
+	<% } %>
+</div>
+
+<% include ../partials/prefooter %>
+<% include ../partials/postfooter %>

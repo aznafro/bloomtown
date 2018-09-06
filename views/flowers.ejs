@@ -1,0 +1,29 @@
+<% include partials/preheader %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/flowers.css">
+<% include partials/postheader %>
+
+<img id="flowerBG" src="https://images.unsplash.com/photo-1487139975590-b4f1dce9b035?ixlib=rb-0.3.5&s=21250f2b139e09c9738f6dd3779a29fe&auto=format&fit=crop&w=500&q=60">
+
+<!-- Add a carousel here for our specials -->
+
+<div class="container">
+	<div class="row">
+		<% flowers.forEach(function(flower) { %>
+			<div class="col-sm-6 col-md-4">
+				<div class="card" style="width: 100%;">
+				  <img class="card-img-top" src="<%= flower.imgURL %>" alt="<%= flower.name %>">
+				  <div class="card-body">
+				    <h5 class="card-title"><%= flower.name %></h5>
+				    <h6 class="card-subtitle mb-2 text-muted"><em>$<%= flower.price %></em></h6>
+				    <p class="card-text"><%= flower.desc %></p>
+				    <button class="show-more" data-text-swap="Less">More</button>
+				  </div>
+				</div>
+			</div>
+		<% }); %>
+	</div>
+</div>
+
+<% include partials/prefooter %>
+<script type="text/javascript" src="/scripts/flowers.js"></script>
+<% include partials/postfooter %>
