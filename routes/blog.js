@@ -25,7 +25,7 @@ router.get("/new", middleware.isAuthenticated, function(req, res) {
 
 // show
 router.get("/:id", function(req, res) {
-	Post.findById(req.params.id, function(error, post) {
+	Post.findById(req.params.id).populate("comments").exec(function(error, post) {
 		if(error) {
 			console.log(error.message);
 			res.redirect("back");
@@ -59,21 +59,39 @@ router.post("/", middleware.isAuthenticated, function(req, res) {
 // destroy
 
 // new - comment
-router.get("/comment/new", middleware.isAuthenticated, function(req, res) {
-	res.render("comment/new");
+router.get("/:id/comment/new", middleware.isAuthenticated, function(req, res) {
+	res.render("comment/new", {
+		postId: req.params.id
+	});
 });
 
 // create - comment
-router.post("/comment", middleware.isAuthenticated, function(req, res) {
+router.post("/:id/comment", middleware.isAuthenticated, function(req, res) {
 	var comment = req.body.comment;
+	var postId = req.params.id;
 	comment.commenter = req.user.username;
-	Comment.create(comment, function(error, comment) {
+	Post.findById(postId, function(error, post) {
 		if(error) {
 			console.log(error.message);
 			res.redirect("back");
 		} else {
-			console.log("Successfully added comment");
-			res.redirect("/posts/" + req.params.id);
+			Comment.create(comment, function(error, comment) {
+				if(error) {
+					console.log(error.message);
+					res.redirect("back");
+				} else {
+					post.comments.push(comment);
+					post.save(function(error) {
+						if(error) {
+							console.log(error.message);
+							res.redirect("back");
+						} else {
+							console.log("Successfully added comment");
+							res.redirect("/posts/" + req.params.id);
+						}
+					});
+				}
+			});
 		}
 	});
 });

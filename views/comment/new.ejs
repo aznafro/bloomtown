@@ -4,7 +4,7 @@
 
 <div class="container">
 	<h1>Comment</h1>
-	<form action="/posts/comment" method="POST">
+	<form action="/posts/<%= postId %>/comment" method="POST">
 	  <div class="form-group">
 	    <label for="author">Author</label>
 	    <input type="text" class="form-control" id="author" value="<%= user.username %>" disabled>

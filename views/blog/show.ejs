@@ -12,16 +12,20 @@
 		</div>
 	</div>
 
-	<a id="addComment" class="btn btn-outline-warning" href="/posts/comment/new">Add Comment</a>
-	
+	<div id="addComment">
+		<a class="btn btn-outline-warning" href="/posts/<%= post._id %>/comment/new">Add Comment</a>
+	</div>
+
 	<% if(post.comments.length > 0) { %>
-		<div class="well">
+		<div class="commentsSection">
 			<h2>Comments</h2>
 			<hr>
 			<% post.comments.forEach(function(comment) { %>
-				<h3><%= comment.commenter %></h3>
-				<span><em><%= comment.date.toDateString() %></em></span>
-				<p><%= comment.content %></p>
+				<div class="comment">
+					<h3><%= comment.commenter %></h3>
+					<span><em><%= comment.date.toDateString() %></em></span>
+					<p><%= comment.content %></p>
+				</div>
 			<% }); %>
 		</div>
 	<% } %>

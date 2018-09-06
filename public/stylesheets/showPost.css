@@ -5,9 +5,20 @@
 
 .card {
 	width: 100%;
+	border: none;
 }
 
 #addComment {
-	float: right;
-	margin-top: 20px;
+	text-align: right;
+	margin: 10px 5px 10px 0;
+}
+
+.comment {
+	box-sizing: border-box;
+	padding: 20px;
+	box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+}
+
+.comment p {
+	margin: 0;
 }
