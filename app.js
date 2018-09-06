@@ -17,7 +17,7 @@ var indexRoutes = require("./routes/index");
 
 // init DB
 mongoose.connect(process.env.BLOOMTOWN_DB);
-// seed();
+seed();
 
 app.use(expressSession({
 	secret: "hello world",

@@ -4,7 +4,8 @@
   "description": "Bloomtown Flowership provides the most fresh and beautiful flowers, prepared to order! Come by anytime and take in the scents and smells of our wide selection of exotic flowers!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Joseph Kwon",
   "license": "ISC",
