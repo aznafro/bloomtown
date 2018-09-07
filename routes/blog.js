@@ -18,12 +18,12 @@ router.get("/", function(req, res) {
 	});
 });
 
-// new
+// new - post
 router.get("/new", middleware.isAuthenticated, function(req, res) {
 	res.render("blog/new");
 });
 
-// show
+// show - post
 router.get("/:id", function(req, res) {
 	Post.findById(req.params.id).populate("comments").exec(function(error, post) {
 		if(error) {
@@ -37,7 +37,7 @@ router.get("/:id", function(req, res) {
 	});
 });
 
-// create
+// create - post
 router.post("/", middleware.isAuthenticated, function(req, res) {
 	var post = req.body.post;
 	post.poster = req.user.username;
@@ -52,11 +52,60 @@ router.post("/", middleware.isAuthenticated, function(req, res) {
 	});
 });
 
-// edit
+// edit - post
+router.get("/:id/edit", middleware.isAuthenticated, function(req, res) {
+	var id = req.params.id;
+	Post.findById(id, function(error, post) {
+		if(error) {
+			console.log(error.message);
+			res.redirect("back");
+		} else {
+			res.render("blog/edit", {
+				post: post
+			}); 
+		}
+	});
+});
 
-// update
+// update - post
+router.put("/:id", middleware.isAuthenticated, function(req, res) {
+	var post = req.body.post;
+	var id = req.params.id;
+	Post.findByIdAndUpdate(id, post, function(error, post) {
+		if(error) {
+			console.log(error.message);
+			res.redirect("back");
+		} else {
+			console.log("Successfully updated Post");
+			res.redirect("/posts/" + id);
+		}
+	});
+});
 
-// destroy
+// destroy - post
+router.delete("/:id", middleware.isAuthenticated, function(req, res) {
+	var id = req.params.id;
+	Post.findByIdAndRemove(id, function(error, post) {
+		if(error) {
+			console.log(error.message);
+			res.redirect("back");
+		} else {
+			var counter = post.comments.length;
+			post.comments.forEach(function(comment) {
+				Comment.findByIdAndRemove(comment._id, function(error) {
+					if(error) {
+						console.log(error.message);
+					} else {
+						// after deleting the last comment, return to the posts page
+						if(--counter == 0) {
+							res.redirect("/posts");
+						}
+					}
+				});
+			});	
+		}
+	});
+});
 
 // new - comment
 router.get("/:id/comment/new", middleware.isAuthenticated, function(req, res) {
@@ -97,12 +146,25 @@ router.post("/:id/comment", middleware.isAuthenticated, function(req, res) {
 });
 
 // edit - comment
-router.get("/comment/:commentId/edit", middleware.isAuthenticated, function(req, res) {
-	res.render("comment/edit");
+router.get("/:id/comment/:commentId/edit", middleware.isAuthenticated, function(req, res) {
+	var postId = req.params.id;
+	var commentId = req.params.commentId;
+	Comment.findById(commentId, function(error, comment) {
+		if(error) {
+			console.log(error.message);
+			res.redirect("back");
+		} else {
+			console.log("Found comment");
+			res.render("comment/edit", {
+				postId: postId,
+				comment: comment
+			});
+		}
+	});
 });
 
 // update - comment
-router.put("/comment/:commentId", middleware.isAuthenticated, function(req, res) {
+router.put("/:id/comment/:commentId", middleware.isAuthenticated, function(req, res) {
 	var comment = req.body.comment;
 	Comment.findByIdAndUpdate(req.params.commentId, comment, function(error, comment) {
 		if(error) {
@@ -116,8 +178,28 @@ router.put("/comment/:commentId", middleware.isAuthenticated, function(req, res)
 });
 
 // destroy - comment
-router.delete("/comment/:commentId", middleware.isAuthenticated, function(req, res) {
-
+router.delete("/:id/comment/:commentId", middleware.isAuthenticated, function(req, res) {
+	Post.findById(req.params.id, function(error, post) {
+		if(error) {
+			console.log(error.message);
+			res.redirect("back");
+		} else {
+			Comment.findByIdAndRemove(req.params.commentId, function(error) {
+				if(error) {
+					console.log(error.message);
+				} else {
+					console.log("Successfully deleted comment");
+				}
+				post.comments.remove(req.params.commentId);
+				post.save(function(error) {
+					if(error) {
+						console.log(error.message);
+					}
+					res.redirect("/posts/" + req.params.id);
+				});
+			});
+		}
+	});
 });
 
 module.exports = router;

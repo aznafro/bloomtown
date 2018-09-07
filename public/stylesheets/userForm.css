@@ -11,6 +11,15 @@ button {
 	float: right;
 }
 
+textarea {
+	min-height: 200px;
+}
+
+.form-control:focus {
+	box-shadow: 0 0 10px #FFA3DD;
+	border: none;
+}
+
 @media only screen and (min-width: 576px) {
 	.container {
 		width: 70%;

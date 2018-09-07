@@ -17,8 +17,21 @@
 	box-sizing: border-box;
 	padding: 20px;
 	box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+	margin-bottom: 20px;
 }
 
 .comment p {
 	margin: 0;
+}
+
+.dropdown {
+	float: right;
+}
+
+.dropdown-toggle {
+	background-color: white;
+}
+
+.dropdown-toggle:focus {
+	box-shadow: 0 0 10px #FFA3DD;	
 }
