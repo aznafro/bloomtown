@@ -1,0 +1,35 @@
+<% include partials/preheader %>
+<% include partials/postheader %>
+
+<div class="container">
+	<h1>Checkout</h1>
+	<div class="row">
+		<% cart.forEach(function(item) { %>
+			<div class="col-sm-6 col-md-4">
+				<div class="card" style="width: 100%;">
+				  	<img class="card-img-top" src="<%= item.flower.imgURL %>" alt="<%= item.flower.name %>">
+				  	<div class="card-body">
+					    <h5 class="card-title"><%= item.flower.name %></h5>
+					    <h6 class="card-subtitle mb-2 text-muted"><em>$<%= item.flower.price %>x <%= item.count %></em></h6>
+					</div>
+				</div>
+			</div>
+		<% }); %>
+
+		<form action="/checkout" method="POST">
+		  <script
+		    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+		    data-key="pk_test_BFLvaAdMJyRRbZMqpZllx6Dx"
+		    data-amount="999"
+		    data-name="Demo Site"
+		    data-description="Widget"
+		    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+		    data-locale="auto"
+		    data-zip-code="true">
+		  </script>
+		</form>
+	</div>
+</div>
+
+<% include partials/prefooter %>
+<% include partials/postfooter %>

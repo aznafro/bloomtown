@@ -10,13 +10,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
   	<ul class="navbar-nav mr-auto">
       <li class="nav-item"><a class="nav-link" href="/flowers">Flowers</a></li>
-      <li class="nav-item"><a class="nav-link" href="/order">Order</a></li>
       <li class="nav-item"><a class="nav-link" href="/posts">Blog</a></li>
       <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
       <li class="nav-item"><a class="nav-link" href="/about">About</a></li> 
     </ul>
     <ul class="navbar-nav">
-
+      <% if(cart && cart.length > 0) { %>
+        <li class="nav-item"><a class="nav-link" href="/checkout"><i class="fas fa-shopping-cart"><span class="badge badge-warning"><%= cart.length %></span></i></a></li>
+      <% } %>
       <% if(!user) { %>
         <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
     	  <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>

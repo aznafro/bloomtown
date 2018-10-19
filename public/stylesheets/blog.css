@@ -9,8 +9,18 @@
 	overflow: auto;
 }
 
-.btn-outline-warning {
+.btn-warning {
+	color: white;
 	float: right;
+	transition: .2s;
+}
+
+.btn-warning:hover {
+	color: #ffc107;
+	background-color: white;
+	border: 1px solid #ffc107;
+	transform: translateY(-5px);
+	box-shadow: 0 5px 10px gray;
 }
 
 .card {

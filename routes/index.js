@@ -16,10 +16,6 @@ router.get("/flowers", function(req, res) {
 	});
 });
 
-router.get("/order", middleware.isAuthenticated, function(req, res) {
-	res.render("order");
-});
-
 router.get("/contact", middleware.isAuthenticated, function(req, res) {
 	res.render("contact");
 });

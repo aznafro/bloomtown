@@ -1,14 +1,24 @@
 $(document).ready(function() {
-	var moreOrLess = $(".show-more");
-	moreOrLess.data("text-original", "More");
+	var moreOrLess = $(".dropdown-toggle");
 	moreOrLess.on("click", function() {
-		$(this).toggleClass("show-less");
-		$(this).parent().find(".card-text").toggleClass("show-flower-desc");
+		$(this).parent().toggleClass("dropup");
+		$(this).parent().parent().find(".card-text").toggleClass("show-flower-desc");
+	});
 
-		if($(this).text() == $(this).data("text-original")) {
-			$(this).text($(this).data("text-swap"));
-		} else {
-			$(this).text($(this).data("text-original"));
+	var howMany = $(".how-many");
+	var minus = $(".minus");
+	minus.on("click", function() {
+		var thisMany = howMany.val();
+		if(thisMany > 0) {
+			howMany.val(howMany.val() - 1);
+		}
+	});
+
+	var plus = $(".plus");
+	plus.on("click", function() {
+		var thisMany = howMany.val();
+		if(thisMany < 10) {
+			howMany.val(parseInt(howMany.val()) + 1);
 		}
 	});
 });

@@ -3,6 +3,19 @@
 	width: 90%;
 }
 
+button[type="submit"] {
+	color: white;
+	transition: .2s;
+}
+
+button[type="submit"]:hover {
+	color: #ffc107;
+	background-color: white;
+	border: 1px solid #ffc107;
+	transform: translateY(-5px);
+	box-shadow: 0 5px 10px gray;
+}
+
 h1 {
 	margin-bottom: 30px;
 }

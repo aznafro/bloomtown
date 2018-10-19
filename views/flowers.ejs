@@ -9,17 +9,55 @@
 <div class="container">
 	<div class="row">
 		<% flowers.forEach(function(flower) { %>
+
 			<div class="col-sm-6 col-md-4">
 				<div class="card" style="width: 100%;">
-				  <img class="card-img-top" src="<%= flower.imgURL %>" alt="<%= flower.name %>">
-				  <div class="card-body">
-				    <h5 class="card-title"><%= flower.name %></h5>
-				    <h6 class="card-subtitle mb-2 text-muted"><em>$<%= flower.price %></em></h6>
-				    <p class="card-text"><%= flower.desc %></p>
-				    <button class="show-more" data-text-swap="Less">More</button>
-				  </div>
+				  	<img class="card-img-top" src="<%= flower.imgURL %>" alt="<%= flower.name %>">
+				  	<div class="card-body">
+					    <h5 class="card-title"><%= flower.name %></h5>
+					    <h6 class="card-subtitle mb-2 text-muted"><em>$<%= flower.price %></em></h6>
+					    <p class="card-text"><%= flower.desc %></p>
+					    <div class="dropdown-div">	
+					    	<button class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+					    </div>
+					    <button class="add-to-cart" data-toggle="modal" data-target="#addFlower<%= flower._id %>">
+						  Add to Cart
+						</button>
+					</div>
 				</div>
 			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="addFlower<%= flower._id %>" tabindex="-1" role="dialog" aria-labelledby="PurchaseFlowerTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="PurchaseFlowerTitle"><%= flower.name %></h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      
+			      <div class="modal-body">
+			        <div class="modal-comp modal-comp-header">
+			        	<h5>How many would you like?</h5>
+			      	</div>
+			      	<img src="<%= flower.imgURL %>" class="img-fluid img-thumbnail mx-auto d-block">
+			      	<form action="/addToCart/<%= flower._id %>?_method=PUT" method="POST">
+				      	<div class="modal-comp">
+					      	<a class="btn btn-warning minus">-</a>
+			      			<input type="number" name="howManyFlowers" class="how-many" value="1" min="1" max="10">
+				      		<a class="btn btn-warning plus">+</a>
+				      	</div>
+				      	<div class="modal-footer">
+					    	<button type="submit" class="btn btn-warning">Submit</button>
+					    </div>
+				    </form>
+			    </div>
+			  </div>
+			</div>
+		  </div>
 		<% }); %>
 	</div>
 </div>
