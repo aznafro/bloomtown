@@ -1,4 +1,4 @@
-# bloomtown
+# Bloomtown
 
 After having mostly completed Udemy's Web Developer Course by Colt Steele, I decided to try and make a functional website with features like registering, making posts and comments, and viewing items for sale that are populated from a database.
 
